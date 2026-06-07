@@ -1,0 +1,7 @@
+flowchart LR
+  User[Authenticated user] --> Web[React SPA]
+  Web --> Cognito[Amazon Cognito Hosted UI]
+  Web --> Api[ASP.NET Core .NET 10 API]
+  Api --> Postgres[(PostgreSQL)]
+  Web --> Mermaid[Mermaid.js renderer]
+  Api --> Logs[OpenTelemetry logs and metrics]

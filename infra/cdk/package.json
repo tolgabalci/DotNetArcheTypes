@@ -1,0 +1,25 @@
+{
+  "name": "mermaid-notes-infra",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "mermaid-notes": "bin/app.ts"
+  },
+  "scripts": {
+    "build": "tsc --noEmit",
+    "synth": "cdk synth",
+    "test": "vitest run test/mermaid-notes-stack.test.ts"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.258.0",
+    "constructs": "10.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "aws-cdk": "2.1126.0",
+    "tsx": "^4.21.0",
+    "typescript": "6.0.3",
+    "vitest": "4.1.8"
+  }
+}

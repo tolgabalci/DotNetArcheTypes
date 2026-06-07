@@ -1,0 +1,14 @@
+flowchart TD
+  GitHub[GitHub Actions] -->|OIDC assume role| AwsIam[AWS IAM deploy role]
+  GitHub -->|CDK deploy| CloudFormation[AWS CloudFormation]
+  CloudFormation --> Cognito[Amazon Cognito]
+  CloudFormation --> CloudFront[CloudFront distribution]
+  CloudFormation --> S3[S3 web bucket]
+  CloudFormation --> Alb[Application Load Balancer]
+  CloudFormation --> Ecs[ECS Fargate service]
+  CloudFormation --> Rds[(RDS PostgreSQL)]
+  CloudFormation --> CloudWatch[CloudWatch logs and metrics]
+  CloudFront --> S3
+  Alb --> Ecs
+  Ecs --> Rds
+  Ecs --> CloudWatch

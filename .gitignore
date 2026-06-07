@@ -1,0 +1,33 @@
+bin/
+obj/
+.vs/
+.vscode/
+.idea/
+.DS_Store
+
+# Node/Vite/CDK
+node_modules/
+dist/
+coverage/
+.vite/
+*.tsbuildinfo
+cdk.out/
+
+# Local environment
+.env
+.env.*
+!.env.example
+appsettings.Development.json
+
+# Test artifacts
+TestResults/
+playwright-report/
+test-results/
+
+# AWS/CDK
+*.js.map
+*.d.ts
+infra/cdk/*.js
+infra/cdk/bin/*.js
+infra/cdk/lib/*.js
+infra/cdk/test/*.js

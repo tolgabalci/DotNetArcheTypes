@@ -1,0 +1,90 @@
+name: deploy
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  deploy-staging:
+    name: Deploy staging
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 26
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+      - name: Build web
+        working-directory: src/web
+        env:
+          VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL }}
+          VITE_AUTH_MODE: oidc
+          VITE_COGNITO_AUTHORITY: ${{ vars.VITE_COGNITO_AUTHORITY }}
+          VITE_COGNITO_CLIENT_ID: ${{ vars.VITE_COGNITO_CLIENT_ID }}
+          VITE_COGNITO_REDIRECT_URI: ${{ vars.VITE_COGNITO_REDIRECT_URI }}
+          VITE_COGNITO_POST_LOGOUT_REDIRECT_URI: ${{ vars.VITE_COGNITO_POST_LOGOUT_REDIRECT_URI }}
+        run: |
+          npm ci
+          npm run build
+      - name: Deploy CDK
+        working-directory: infra/cdk
+        run: |
+          npm ci
+          npx cdk deploy MermaidNotes-staging \
+            --require-approval never \
+            --context stage=staging \
+            --context githubOwner=${{ github.repository_owner }} \
+            --context githubRepo=${{ github.event.repository.name }} \
+            --context callbackUrls='["${{ vars.VITE_COGNITO_REDIRECT_URI }}"]' \
+            --context logoutUrls='["${{ vars.VITE_COGNITO_POST_LOGOUT_REDIRECT_URI }}"]'
+
+  deploy-production:
+    name: Deploy production
+    runs-on: ubuntu-latest
+    environment: production
+    needs: deploy-staging
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 26
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+      - name: Build web
+        working-directory: src/web
+        env:
+          VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL }}
+          VITE_AUTH_MODE: oidc
+          VITE_COGNITO_AUTHORITY: ${{ vars.VITE_COGNITO_AUTHORITY }}
+          VITE_COGNITO_CLIENT_ID: ${{ vars.VITE_COGNITO_CLIENT_ID }}
+          VITE_COGNITO_REDIRECT_URI: ${{ vars.VITE_COGNITO_REDIRECT_URI }}
+          VITE_COGNITO_POST_LOGOUT_REDIRECT_URI: ${{ vars.VITE_COGNITO_POST_LOGOUT_REDIRECT_URI }}
+        run: |
+          npm ci
+          npm run build
+      - name: Deploy CDK
+        working-directory: infra/cdk
+        run: |
+          npm ci
+          npx cdk deploy MermaidNotes-production \
+            --require-approval never \
+            --context stage=production \
+            --context githubOwner=${{ github.repository_owner }} \
+            --context githubRepo=${{ github.event.repository.name }} \
+            --context callbackUrls='["${{ vars.VITE_COGNITO_REDIRECT_URI }}"]' \
+            --context logoutUrls='["${{ vars.VITE_COGNITO_POST_LOGOUT_REDIRECT_URI }}"]'

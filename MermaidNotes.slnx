@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="src/api/MermaidNotes.Api.csproj" />
+  <Project Path="src/apphost/MermaidNotes.AppHost.csproj" />
+  <Project Path="tests/api/MermaidNotes.Api.Tests.csproj" />
+</Solution>

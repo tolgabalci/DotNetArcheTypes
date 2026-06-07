@@ -1,0 +1,12 @@
+{
+  "app": "npx tsx bin/app.ts",
+  "context": {
+    "stage": "staging",
+    "githubOwner": "replace-me",
+    "githubRepo": "replace-me",
+    "cognitoDomainPrefix": "mermaid-notes-staging",
+    "webAllowedOrigins": ["http://localhost:5173"],
+    "callbackUrls": ["http://localhost:5173"],
+    "logoutUrls": ["http://localhost:5173"]
+  }
+}

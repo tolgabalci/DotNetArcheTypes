@@ -1,0 +1,264 @@
+:root {
+  color-scheme: light;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f6f7f9;
+  color: #20242a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    linear-gradient(180deg, #ffffff 0, #f6f7f9 260px),
+    #f6f7f9;
+}
+
+button {
+  font: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+  padding-bottom: 48px;
+}
+
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 28px;
+  border-bottom: 1px solid #d7dde5;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(10px);
+}
+
+.top-nav > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.page-shell {
+  width: min(1120px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 28px 0;
+}
+
+.feed-header,
+.editor-header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.search-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 10px;
+  margin: 0 0 20px;
+}
+
+.feed-list {
+  display: grid;
+  gap: 18px;
+}
+
+.entry-card {
+  border: 1px solid #d9dee8;
+  border-radius: 8px;
+  box-shadow: 0 8px 28px rgba(31, 42, 55, 0.08);
+}
+
+.entry-card-highlighted {
+  outline: 3px solid #4f8cff;
+  outline-offset: 2px;
+}
+
+.entry-card-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: start;
+}
+
+.entry-description {
+  margin-top: 8px;
+  max-height: 120px;
+  overflow: hidden;
+  color: #333d4d;
+}
+
+.entry-description :first-child {
+  margin-top: 0;
+}
+
+.entry-description :last-child {
+  margin-bottom: 0;
+}
+
+.chart-open-button {
+  display: block;
+  width: 100%;
+  min-height: 220px;
+  margin: 12px 0 0;
+  padding: 16px;
+  border: 1px solid #d7dde5;
+  border-radius: 6px;
+  background: #fbfcfe;
+  cursor: pointer;
+}
+
+.chart-open-button:hover {
+  border-color: #7c92b0;
+  background: #f4f7fb;
+}
+
+.chart-renderer {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 180px;
+  overflow: auto;
+}
+
+.chart-renderer svg {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+}
+
+.chart-renderer-loading,
+.centered-state,
+.empty-state {
+  display: grid;
+  place-items: center;
+  min-height: 240px;
+  text-align: center;
+}
+
+.empty-state {
+  gap: 12px;
+  border: 1px dashed #b8c2d0;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.load-more-sentinel {
+  min-height: 40px;
+}
+
+.editor-page {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: 14px;
+  width: min(1440px, calc(100vw - 32px));
+  height: calc(100vh - 114px);
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.description-editor textarea {
+  min-height: 86px;
+}
+
+.split-editor {
+  min-height: 420px;
+  border: 1px solid #d7dde5;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.resize-handle {
+  width: 8px;
+  background: #e9edf3;
+  cursor: col-resize;
+}
+
+.resize-handle:hover,
+.resize-handle[data-resize-handle-active] {
+  background: #7c92b0;
+}
+
+.mermaid-editor {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  height: 100%;
+  min-height: 0;
+  background: #ffffff;
+}
+
+.editor-toolbar {
+  border-bottom: 1px solid #e2e7ef;
+}
+
+.preview-pane {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  min-height: 0;
+  padding: 18px;
+  overflow: auto;
+  background: #fafbfc;
+}
+
+.preview-pane .chart-renderer {
+  height: 100%;
+}
+
+.login-page {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 16px;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.security-note {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  max-width: min(520px, calc(100vw - 40px));
+  box-shadow: 0 10px 30px rgba(31, 42, 55, 0.16);
+}
+
+@media (max-width: 820px) {
+  .top-nav,
+  .feed-header,
+  .editor-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .search-row {
+    grid-template-columns: 1fr;
+  }
+
+  .editor-page {
+    height: auto;
+  }
+
+  .split-editor {
+    display: block;
+    min-height: 760px;
+  }
+
+  .resize-handle {
+    display: none;
+  }
+}
