@@ -12,6 +12,7 @@ jobs:
   deploy-staging:
     name: Deploy staging
     runs-on: ubuntu-latest
+    if: vars.ENABLE_AWS_DEPLOY == 'true'
     environment: staging
     steps:
       - uses: actions/checkout@v4
@@ -53,6 +54,7 @@ jobs:
   deploy-production:
     name: Deploy production
     runs-on: ubuntu-latest
+    if: vars.ENABLE_AWS_DEPLOY == 'true'
     environment: production
     needs: deploy-staging
     steps:

@@ -14,7 +14,8 @@
 3. Deploy staging once from a trusted local workstation.
 4. Copy the `GitHubDeployRoleArn` output into the `staging` GitHub Environment secret `AWS_DEPLOY_ROLE_ARN`.
 5. Copy `ApiUrl`, `CognitoAuthority`, and `CognitoClientId` outputs into the matching GitHub Environment variables.
-6. Repeat for production after reviewing CDK diff.
+6. Set repository variable `ENABLE_AWS_DEPLOY` to `true` after both environments have the required variables and secrets.
+7. Repeat for production after reviewing CDK diff.
 
 ## Deploy
 
