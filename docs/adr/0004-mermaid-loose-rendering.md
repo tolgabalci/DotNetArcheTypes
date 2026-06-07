@@ -10,7 +10,7 @@ Configure Mermaid with `securityLevel: "loose"` for the v1 editor and feed rende
 
 ## Rationale
 
-The product goal prioritizes rich Mermaid authoring and interview demonstration value. Loose rendering allows more Mermaid features and aligns with the requested behavior.
+The product goal prioritizes rich Mermaid authoring. Loose rendering allows more Mermaid features and aligns with the requested behavior.
 
 ## Mitigations
 

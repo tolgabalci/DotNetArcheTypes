@@ -1,6 +1,6 @@
 # Mermaid Notes .NET 10 Reference App
 
-Mermaid Notes is an interview-ready reference application for private diagram notes. Signed-in users create Markdown summaries with Mermaid chart definitions, browse a reverse-chronological feed, search descriptions and Mermaid source, and edit diagrams in a split Monaco/Mermaid live preview experience.
+Mermaid Notes is a reference application for private diagram notes. Signed-in users create Markdown summaries with Mermaid chart definitions, browse a reverse-chronological feed, search descriptions and Mermaid source, and edit diagrams in a split Monaco/Mermaid live preview experience.
 
 The repo intentionally demonstrates a modern .NET-on-AWS architecture:
 
